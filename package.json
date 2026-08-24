@@ -1,0 +1,24 @@
+{
+  "name": "pablo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FERAagency/pablo-odriozola-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FERAagency/pablo-odriozola-portfolio/issues"
+  },
+  "homepage": "https://github.com/FERAagency/pablo-odriozola-portfolio#readme",
+  "dependencies": {
+    "nodemailer": "^9.0.0"
+  }
+}

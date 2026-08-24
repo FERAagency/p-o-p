@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Tienda de arte — Pablo Odriozola</title>
+  <meta name="description" content="Obra original al óleo a la venta. Original oil paintings for sale by Pablo Odriozola." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tienda de arte — Pablo Odriozola" />
+  <meta property="og:description" content="Obra original al óleo a la venta. Original oil paintings for sale." />
+  <meta property="og:image" content="/og-default.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Parisienne&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="page--inner">
+  <a class="skip-link" href="#shop" data-i18n="skip_to_gallery">Saltar a la galería</a>
+
+  <!-- ===================== HEADER / NAV (solid on inner pages) ===================== -->
+  <header class="site-header is-solid" id="site-header">
+    <nav class="nav" aria-label="Principal">
+      <ul class="nav__links" id="nav-links">
+        <li><a href="shop.html" class="is-current" aria-current="page" data-i18n="nav_shop">Tienda de arte</a></li>
+        <li><a href="about.html" data-i18n="nav_about">Sobre</a></li>
+        <li><a href="exhibitions.html" data-i18n="nav_exhibitions">Exposiciones</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contacto</a></li>
+      </ul>
+
+      <a class="nav__brand" href="index.html">
+        <span class="nav__name">Pablo Odriozola</span>
+      </a>
+
+      <div class="nav__right">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="lang-toggle__btn" data-lang="es">ES</button>
+          <span class="lang-toggle__sep" aria-hidden="true">·</span>
+          <button type="button" class="lang-toggle__btn" data-lang="en">EN</button>
+        </div>
+        <button type="button" class="nav__menu-toggle" id="menu-toggle"
+                aria-expanded="false" aria-controls="nav-links" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="shop" id="shop">
+      <header class="shop__head">
+        <h1 class="shop__title" data-i18n="shop_title">Tienda de arte</h1>
+        <p class="shop__intro" data-i18n="shop_intro">
+          Obra original al óleo sobre tela. Cada pieza es única; una vez vendida, no se repite.
+        </p>
+      </header>
+
+      <div class="shop__toolbar">
+        <p class="shop__count" id="shop-count"></p>
+        <label class="shop__sort">
+          <span data-i18n="sort_label">Ordenar</span>
+          <select id="shop-sort">
+            <option value="featured"   data-i18n="sort_featured">Destacado</option>
+            <option value="price_asc"  data-i18n="sort_price_asc">Precio: menor a mayor</option>
+            <option value="price_desc" data-i18n="sort_price_desc">Precio: mayor a menor</option>
+            <option value="year_desc"  data-i18n="sort_year_desc">Año: más reciente</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="shop__body">
+        <!-- Filter sidebar (built/managed by shop.js) -->
+        <aside class="shop__sidebar" id="shop-sidebar" aria-label="Filtros"></aside>
+
+        <!-- Painting grid -->
+        <div class="shop__grid" id="shop-grid" aria-live="polite" aria-busy="true"></div>
+      </div>
+
+      <p class="gallery__empty" id="shop-empty" hidden data-i18n="gallery_empty">
+        Pronto habrá obra disponible.
+      </p>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <a class="site-footer__brand" href="index.html">PABLO ODRIOZOLA</a>
+      <nav class="site-footer__nav" aria-label="Pie de página">
+        <a href="shop.html" data-i18n="nav_shop">Tienda de arte</a>
+        <a href="about.html" data-i18n="nav_about">Sobre</a>
+        <a href="exhibitions.html" data-i18n="nav_exhibitions">Exposiciones</a>
+        <a href="contact.html" data-i18n="nav_contact">Contacto</a>
+        <a href="privacy.html" data-i18n="nav_privacy">Privacidad</a>
+        <a href="terms.html" data-i18n="nav_terms">Términos</a>
+      </nav>
+      <a class="site-footer__ig" href="https://www.instagram.com/arteodriozola" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+        </svg>
+      </a>
+      <p class="site-footer__copy">© <span id="year"></span> Pablo Odriozola</p>
+    </div>
+  </footer>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox__backdrop" id="lightbox-backdrop"></div>
+    <button type="button" class="lightbox__close" id="lightbox-close" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+    <figure class="lightbox__figure" id="lightbox-figure">
+      <img class="lightbox__img" id="lightbox-img" alt="" />
+      <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
+    </figure>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

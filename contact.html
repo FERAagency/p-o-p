@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Contacto — Pablo Odriozola</title>
+  <meta name="description" content="Escribile a Pablo Odriozola: consultas sobre obra, encargos y envíos. Get in touch with painter Pablo Odriozola." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Contacto — Pablo Odriozola" />
+  <meta property="og:description" content="Escribile a Pablo Odriozola. Get in touch with painter Pablo Odriozola." />
+  <meta property="og:image" content="/og-default.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Parisienne&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="page--inner">
+  <a class="skip-link" href="#contact" data-i18n="skip_to_contact">Saltar al formulario</a>
+
+  <!-- ===================== HEADER / NAV (solid on inner pages) ===================== -->
+  <header class="site-header is-solid" id="site-header">
+    <nav class="nav" aria-label="Principal">
+      <ul class="nav__links" id="nav-links">
+        <li><a href="shop.html" data-i18n="nav_shop">Tienda de arte</a></li>
+        <li><a href="about.html" data-i18n="nav_about">Sobre</a></li>
+        <li><a href="exhibitions.html" data-i18n="nav_exhibitions">Exposiciones</a></li>
+        <li><a href="contact.html" class="is-current" aria-current="page" data-i18n="nav_contact">Contacto</a></li>
+      </ul>
+
+      <a class="nav__brand" href="index.html">
+        <span class="nav__name">Pablo Odriozola</span>
+      </a>
+
+      <div class="nav__right">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" class="lang-toggle__btn" data-lang="es">ES</button>
+          <span class="lang-toggle__sep" aria-hidden="true">·</span>
+          <button type="button" class="lang-toggle__btn" data-lang="en">EN</button>
+        </div>
+        <button type="button" class="nav__menu-toggle" id="menu-toggle"
+                aria-expanded="false" aria-controls="nav-links" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contact" id="contact">
+      <header class="contact__head">
+        <h1 class="contact__title" data-i18n="contact_title">Contacto</h1>
+        <p class="contact__intro" data-i18n="contact_intro">
+          ¿Una consulta sobre una obra, un encargo o un envío? Escribime y te respondo a la brevedad.
+        </p>
+      </header>
+
+      <form class="contact__form" id="contact-form" novalidate>
+        <div class="field">
+          <label class="field__label" for="cf-name" data-i18n="f_name">Nombre</label>
+          <input class="field__input" id="cf-name" name="name" type="text"
+                 autocomplete="name" maxlength="120" required />
+          <p class="field__error" id="cf-name-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="cf-email" data-i18n="f_email">Email</label>
+          <input class="field__input" id="cf-email" name="email" type="email"
+                 autocomplete="email" maxlength="200" required />
+          <p class="field__error" id="cf-email-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="cf-message" data-i18n="f_message">Mensaje</label>
+          <textarea class="field__input field__textarea" id="cf-message" name="message"
+                    rows="6" maxlength="3000" required></textarea>
+          <p class="field__error" id="cf-message-error" hidden></p>
+        </div>
+
+        <!-- Honeypot: hidden from people, tempting to bots. Real users leave it empty. -->
+        <div class="field field--hp" aria-hidden="true">
+          <label for="cf-company">Company</label>
+          <input id="cf-company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button class="btn-solid" type="submit" id="cf-submit" data-i18n="contact_send">Enviar</button>
+
+        <p class="contact__status" id="cf-status" role="status" aria-live="polite" hidden></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <a class="site-footer__brand" href="index.html">PABLO ODRIOZOLA</a>
+      <nav class="site-footer__nav" aria-label="Pie de página">
+        <a href="shop.html" data-i18n="nav_shop">Tienda de arte</a>
+        <a href="about.html" data-i18n="nav_about">Sobre</a>
+        <a href="exhibitions.html" data-i18n="nav_exhibitions">Exposiciones</a>
+        <a href="contact.html" data-i18n="nav_contact">Contacto</a>
+        <a href="privacy.html" data-i18n="nav_privacy">Privacidad</a>
+        <a href="terms.html" data-i18n="nav_terms">Términos</a>
+      </nav>
+      <a class="site-footer__ig" href="https://www.instagram.com/arteodriozola" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+        </svg>
+      </a>
+      <p class="site-footer__copy">© <span id="year"></span> Pablo Odriozola</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

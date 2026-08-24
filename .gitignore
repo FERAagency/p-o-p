@@ -1,0 +1,26 @@
+# Secrets — never commit
+.env
+.env.*
+
+# Netlify / tooling
+.netlify/
+node_modules/
+
+# Supabase CLI local state
+supabase/.temp/
+
+# Local source images — not deployed (site loads images from Supabase Storage).
+# Large upscaled PNGs (60-70MB each) must never go to GitHub.
+pic/
+
+# Design reference screenshots (erinhanson.com etc.) — copyrighted, dev-only, never deploy.
+ref/
+
+# OS / editor junk
+.DS_Store
+*~
+.vscode/
+.~lock.*#
+
+# Internal project notes — kept local, not published
+CLAUDE.md

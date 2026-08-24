@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <title>Admin — Pablo Odriozola</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/admin.css" />
+</head>
+
+<body>
+  <!-- ===================== LOGIN ===================== -->
+  <section class="login" id="login-view" hidden>
+    <form class="login__card" id="login-form" autocomplete="on">
+      <h1 class="login__title">Panel de Pablo</h1>
+      <p class="login__sub">Iniciá sesión para administrar las obras.</p>
+
+      <label class="field">
+        <span class="field__label">Email</span>
+        <input type="email" id="login-email" name="email" required autocomplete="username" />
+      </label>
+      <label class="field">
+        <span class="field__label">Contraseña</span>
+        <input type="password" id="login-password" name="password" required autocomplete="current-password" />
+      </label>
+
+      <button type="submit" class="btn btn--primary" id="login-btn">Entrar</button>
+      <p class="login__error" id="login-error" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <!-- ===================== DASHBOARD ===================== -->
+  <div class="admin" id="admin-view" hidden>
+    <header class="admin__bar">
+      <div class="admin__brand">Pablo Odriozola · Admin</div>
+      <div class="admin__bar-right">
+        <span class="admin__user" id="admin-user"></span>
+        <a class="btn btn--ghost" href="../index.html" target="_blank" rel="noopener">Ver sitio ↗</a>
+        <button type="button" class="btn btn--ghost" id="password-btn">Cambiar contraseña</button>
+        <button type="button" class="btn btn--ghost" id="logout-btn">Salir</button>
+      </div>
+    </header>
+
+    <main class="admin__main">
+      <div class="admin__head">
+        <h2 class="admin__title">Obras <span class="admin__count" id="paint-count"></span></h2>
+        <button type="button" class="btn btn--primary" id="add-btn">+ Nueva obra</button>
+      </div>
+
+      <p class="admin__hint">
+        Arrastrá <span class="grip" aria-hidden="true">⠿</span> para reordenar cómo aparecen en la galería.
+        Los cambios de orden se guardan al soltar.
+      </p>
+
+      <div class="admin__status" id="list-status" role="status">Cargando…</div>
+
+      <ul class="plist" id="paint-list" aria-label="Lista de obras"></ul>
+    </main>
+  </div>
+
+  <!-- ===================== EDIT / ADD MODAL ===================== -->
+  <div class="modal" id="edit-modal" hidden>
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal__head">
+        <h2 class="modal__title" id="modal-title">Nueva obra</h2>
+        <button type="button" class="modal__close" id="modal-close" aria-label="Cerrar">✕</button>
+      </header>
+
+      <form class="form" id="paint-form">
+        <input type="hidden" id="f-id" />
+
+        <!-- Image -->
+        <div class="form__row">
+          <div class="imgfield">
+            <div class="imgfield__preview" id="img-preview">
+              <span class="imgfield__placeholder">Sin imagen</span>
+            </div>
+            <div class="imgfield__controls">
+              <label class="btn btn--ghost imgfield__pick">
+                Elegir imagen
+                <input type="file" id="f-image" accept="image/*" hidden />
+              </label>
+              <p class="imgfield__note" id="img-note">
+                Se optimiza automáticamente (máx. 2000&nbsp;px, WebP) antes de subir.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Titles -->
+        <div class="form__grid2">
+          <label class="field">
+            <span class="field__label">Título (ES)</span>
+            <input type="text" id="f-title_es" />
+          </label>
+          <label class="field">
+            <span class="field__label">Title (EN)</span>
+            <input type="text" id="f-title_en" />
+          </label>
+        </div>
+
+        <!-- Medium -->
+        <div class="form__grid2">
+          <label class="field">
+            <span class="field__label">Técnica (ES)</span>
+            <input type="text" id="f-medium_es" placeholder="Óleo sobre tela" />
+          </label>
+          <label class="field">
+            <span class="field__label">Medium (EN)</span>
+            <input type="text" id="f-medium_en" placeholder="Oil on canvas" />
+          </label>
+        </div>
+
+        <!-- Dimensions + year -->
+        <div class="form__grid3">
+          <label class="field">
+            <span class="field__label">Ancho (cm)</span>
+            <input type="number" id="f-width_cm" step="0.1" min="0" inputmode="decimal" />
+          </label>
+          <label class="field">
+            <span class="field__label">Alto (cm)</span>
+            <input type="number" id="f-height_cm" step="0.1" min="0" inputmode="decimal" />
+          </label>
+          <label class="field">
+            <span class="field__label">Año</span>
+            <input type="number" id="f-year" step="1" min="0" inputmode="numeric" />
+          </label>
+        </div>
+
+        <!-- Prices -->
+        <div class="form__grid2">
+          <label class="field">
+            <span class="field__label">Precio USD</span>
+            <input type="number" id="f-price_usd" step="1" min="0" inputmode="numeric" />
+          </label>
+          <label class="field">
+            <span class="field__label">Precio ARS</span>
+            <input type="number" id="f-price_ars" step="1" min="0" inputmode="numeric" />
+          </label>
+        </div>
+
+        <!-- Status + category -->
+        <div class="form__grid2">
+          <label class="field">
+            <span class="field__label">Estado</span>
+            <select id="f-status">
+              <option value="draft">Borrador (oculto)</option>
+              <option value="available">Disponible</option>
+              <option value="reserved">Reservado</option>
+              <option value="sold">Vendido</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field__label">Categoría (opcional)</span>
+            <input type="text" id="f-category" placeholder="serie, tema…" />
+          </label>
+        </div>
+
+        <p class="form__error" id="form-error" role="alert" hidden></p>
+
+        <footer class="form__actions">
+          <button type="button" class="btn btn--danger-ghost" id="delete-btn" hidden>Eliminar</button>
+          <div class="form__actions-right">
+            <button type="button" class="btn btn--ghost" id="cancel-btn">Cancelar</button>
+            <button type="submit" class="btn btn--primary" id="save-btn">Guardar</button>
+          </div>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== CHANGE PASSWORD MODAL ===================== -->
+  <div class="modal" id="password-modal" hidden>
+    <div class="modal__backdrop" id="pw-backdrop"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="pw-title">
+      <header class="modal__head">
+        <h2 class="modal__title" id="pw-title">Cambiar contraseña</h2>
+        <button type="button" class="modal__close" id="pw-close" aria-label="Cerrar">✕</button>
+      </header>
+
+      <form class="form" id="password-form" autocomplete="off">
+        <label class="field">
+          <span class="field__label">Contraseña actual</span>
+          <input type="password" id="pw-current" name="current-password" required autocomplete="current-password" />
+        </label>
+        <label class="field">
+          <span class="field__label">Contraseña nueva (mín. 8 caracteres)</span>
+          <input type="password" id="pw-new" name="new-password" required minlength="8" autocomplete="new-password" />
+        </label>
+        <label class="field">
+          <span class="field__label">Repetir contraseña nueva</span>
+          <input type="password" id="pw-confirm" name="confirm-password" required minlength="8" autocomplete="new-password" />
+        </label>
+
+        <p class="form__error" id="pw-error" role="alert" hidden></p>
+        <p class="form__success" id="pw-success" role="status" hidden></p>
+
+        <footer class="form__actions">
+          <div class="form__actions-right">
+            <button type="button" class="btn btn--ghost" id="pw-cancel">Cancelar</button>
+            <button type="submit" class="btn btn--primary" id="pw-save">Guardar</button>
+          </div>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
