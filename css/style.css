@@ -39,6 +39,13 @@
 
 html { scroll-behavior: smooth; }
 
+/* Nothing may ever make the document wider than the screen: on mobile that
+   widens the *layout viewport*, which stretches position:fixed elements
+   (the nav) off-screen while normal blocks (hero, gallery) stay narrow —
+   the "I have to pinch-zoom out" bug. `clip` rather than `hidden` because
+   clip does not create a scroll container, so position:sticky still works. */
+html, body { overflow-x: clip; }
+
 body {
   margin: 0;
   background: var(--bg);
@@ -48,7 +55,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -492,7 +498,11 @@ body::after {  /* soft warm vignette */
 }
 .site-footer__nav {
   display: flex;
-  gap: 1.4rem;
+  /* must wrap: six uppercase links are ~550px on one line and pushed the
+     whole page wider than a 360px phone screen (forcing a pinch-zoom out) */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1.4rem;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -843,10 +853,14 @@ body::after {  /* soft warm vignette */
    MOBILE  (designed, not just shrunk — per CLAUDE.md)
    ============================================================ */
 @media (max-width: 760px) {
-  .nav { grid-template-columns: auto 1fr auto; }
-  .nav__brand { grid-column: 1; align-items: flex-start; text-align: left; }
-  .nav__name { font-size: 2rem; letter-spacing: 0; }
-  .nav__right { grid-column: 3; }
+  /* Two real columns (no empty spacer). minmax(0,…) lets the wordmark
+     shrink instead of forcing the nav wider than the screen — important
+     while Great Vibes is still loading, since the generic cursive
+     fallback is considerably wider. */
+  .nav { grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem; }
+  .nav__brand { grid-column: 1; min-width: 0; align-items: flex-start; text-align: left; }
+  .nav__name { font-size: clamp(1.5rem, 8.5vw, 2rem); letter-spacing: 0; }
+  .nav__right { grid-column: 2; }
 
   /* links collapse into a dropdown panel */
   .nav__links {
